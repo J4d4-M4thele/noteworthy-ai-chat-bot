@@ -143,10 +143,9 @@ export default function Chat() {
                       <div className={`inline-block p-4 rounded-lg ${message.role === "user"? 
                         "bg-primary text-primary-foreground": "bg-muted"}`}>
                         <ReactMarkdown 
-                         children={message.content}
                          remarkPlugins={[remarkGfm]}
                          components={{
-                          code({node, inline, className, children, ...props}) {
+                          code({inline, children, ...props}) {
                             return inline ? (
                               <code {...props} className="bg-gray-200 px-1 rounded">{children}</code>
                             ) : (
@@ -166,7 +165,9 @@ export default function Chat() {
                             </ol>
                           )
                          }}
-                        />
+                        >
+                          {message.content}
+                        </ReactMarkdown>
                       </div>
                     </div>
                   )) }
